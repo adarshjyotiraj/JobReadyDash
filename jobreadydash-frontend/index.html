@@ -1,166 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobReadyDash - Login (SIH26135)</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <style>
-        body {
-            background-color: var(--background-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .login-card {
-            max-width: 450px;
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            background: #fff;
-            padding: 40px;
-        }
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .login-header h2 {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-top: 15px;
-        }
-        .login-header img {
-            width: 80px;
-            height: auto;
-        }
-        .govt-tag {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-top: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JobReadyDash — Sign In | SIH26135</title>
+  <meta name="description" content="JobReadyDash — Employment outcome tracking dashboard for skilling programs. Smart India Hackathon 2026 (SIH26135)." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3B63'/%3E%3Cpath d='M9 20l4-6 3 4 3-5 4 7z' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <!-- Bootstrap 5 + Icons (only CSS framework allowed) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
+  <div class="tricolor-bar"></div>
 
-    <div class="login-container w-100 px-3">
-        <div class="login-card mx-auto">
-            <div class="login-header">
-                <i class="bi bi-shield-lock text-primary" style="font-size: 4rem;"></i>
-                <h2>JobReadyDash</h2>
-                <span class="govt-tag">SIH26135 - Secure Portal</span>
+  <div class="login-page">
+    <div class="login-split">
+      <!-- ── Left: branding panel ─────────────────────────────── -->
+      <div class="login-brand">
+        <div class="login-brand-inner">
+          <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
+            <span class="gov-badge" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25)">
+              <i class="bi bi-award"></i> Smart India Hackathon 2026
+            </span>
+            <span class="gov-badge" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25)">SIH26135</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <span class="brand-mark light" style="width:52px;height:52px;font-size:1.6rem"><i class="bi bi-bar-chart-line-fill"></i></span>
+            <div>
+              <h1 class="mb-0">JobReadyDash</h1>
+              <p class="mb-0" style="color:#8fa9c4;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Employment Outcome Tracking</p>
             </div>
-            
-            <div id="login-error" class="alert alert-danger d-none" role="alert">
-                Invalid username or password.
-            </div>
+          </div>
+          <p class="lead">A government-grade dashboard to track placement outcomes, monitor programme performance and close skill gaps across districts.</p>
 
-            <form id="login-form">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" id="username" required>
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="password" required>
-                        <button class="btn btn-outline-secondary" type="button" id="toggle-password">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                    </div>
-                </div>
+          <div class="mt-3">
+            <div class="login-feature"><i class="bi bi-people-fill"></i><span><strong style="color:#fff">Participant management</strong> — enrolment records, districts, programmes and employment status.</span></div>
+            <div class="login-feature"><i class="bi bi-graph-up-arrow"></i><span><strong style="color:#fff">Placement analytics</strong> — placement rate, employment distribution and district comparison.</span></div>
+            <div class="login-feature"><i class="bi bi-diagram-3-fill"></i><span><strong style="color:#fff">Skill-gap insights</strong> — demand vs. supply signals to guide training investments.</span></div>
+            <div class="login-feature"><i class="bi bi-shield-lock-fill"></i><span><strong style="color:#fff">Role-based access</strong> — Admin, Data Entry and Analyst / Viewer workspaces.</span></div>
+          </div>
 
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-lg" id="login-btn">
-                        <span>Login to Dashboard</span>
-                        <div class="spinner-border spinner-border-sm text-light d-none" id="login-spinner" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </button>
-                </div>
-                
-                <div class="mt-4 text-center text-muted" style="font-size: 0.85rem;">
-                    <p class="mb-1">Demo Credentials (Mock Mode):</p>
-                    <p class="mb-0"><strong>admin</strong> / password</p>
-                    <p class="mb-0"><strong>dataentry</strong> / password</p>
-                    <p class="mb-0"><strong>analyst</strong> / password</p>
-                </div>
-            </form>
+          <div class="login-stats">
+            <div class="stat"><b>67.9%</b><span>Placement rate</span></div>
+            <div class="stat"><b>8</b><span>Districts</span></div>
+            <div class="stat"><b>8</b><span>Programs</span></div>
+          </div>
+
+          <p class="mt-4 mb-0" style="font-size:.75rem;color:#7d9ab8">
+            <i class="bi bi-info-circle me-1"></i> MVP demo build for SIH 2026 presentation. Backend integration via REST API + JWT.
+          </p>
         </div>
+      </div>
+
+      <!-- ── Right: login form ────────────────────────────────── -->
+      <div class="login-form-wrap">
+        <div class="login-card">
+          <div class="brand-row">
+            <span class="brand-mark"><i class="bi bi-bar-chart-line-fill"></i></span>
+            <div>
+              <div class="brand-name">JobReadyDash</div>
+              <div class="brand-sub">SIH 2026 · SIH26135</div>
+            </div>
+            <span id="loginDemoBadge" class="demo-badge ms-auto" title="Running with sample data. Set USE_MOCK_DATA=false in js/config.js to use the real backend.">
+              <i class="bi bi-flask"></i> Demo mode
+            </span>
+          </div>
+
+          <h2 style="font-size:1.35rem;font-weight:800" class="mb-1">Sign in</h2>
+          <p class="text-muted small mb-3">Access your programme workspace with your assigned credentials.</p>
+
+          <div id="loginAlert" class="alert alert-danger d-flex align-items-start gap-2 py-2 small login-error" role="alert">
+            <i class="bi bi-exclamation-octagon-fill mt-1"></i>
+            <span id="loginAlertMsg">Invalid username or password.</span>
+          </div>
+          <div id="loginInfo" class="alert alert-info d-flex align-items-start gap-2 py-2 small" style="display:none" role="status">
+            <i class="bi bi-info-circle-fill mt-1"></i>
+            <span id="loginInfoMsg"></span>
+          </div>
+
+          <form id="loginForm" novalidate>
+            <div class="mb-3">
+              <label for="loginUsername" class="form-label">Username or email <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" id="loginUsername" name="username"
+                       placeholder="e.g. admin" autocomplete="username" required minlength="3" />
+                <div class="invalid-feedback">Please enter your username (min. 3 characters).</div>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="loginPassword" class="form-label">Password <span class="required">*</span></label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input type="password" class="form-control" id="loginPassword" name="password"
+                       placeholder="Enter your password" autocomplete="current-password" required minlength="4" />
+                <span class="input-group-text password-toggle" id="passwordToggle" title="Show / hide password" role="button" tabindex="0">
+                  <i class="bi bi-eye" id="passwordToggleIcon"></i>
+                </span>
+                <div class="invalid-feedback">Please enter your password (min. 4 characters).</div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe" checked />
+                <label class="form-check-label small" for="rememberMe">Keep me signed in</label>
+              </div>
+              <span class="small text-muted"><i class="bi bi-shield-check me-1"></i>JWT secured</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
+              <span id="loginBtnLabel"><i class="bi bi-box-arrow-in-right me-1"></i> Sign in to Dashboard</span>
+              <span id="loginBtnSpinner" style="display:none"><span class="spinner-border" role="status" aria-hidden="true"></span> Signing in…</span>
+            </button>
+          </form>
+
+          <div class="demo-creds mt-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <strong><i class="bi bi-key me-1"></i>Demo accounts <span class="text-muted fw-normal">(mock mode)</span></strong>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-primary" data-demo-user="admin" data-demo-pass="admin123">
+                <i class="bi bi-person-gear me-1"></i>Admin
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary" data-demo-user="dataentry" data-demo-pass="data123">
+                <i class="bi bi-keyboard me-1"></i>Data Entry
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary" data-demo-user="analyst" data-demo-pass="analyst123">
+                <i class="bi bi-graph-up me-1"></i>Analyst
+              </button>
+            </div>
+            <div class="text-muted mt-2" style="font-size:.74rem">Click a role to auto-fill credentials, then press Sign in.</div>
+          </div>
+
+          <p class="text-center text-muted mt-3 mb-0" style="font-size:.75rem">
+            Protected workspace · Unauthorised access is prohibited<br />
+            <span style="color:#94a3b8">JobReadyDash v1.0.0-mvp · SIH26135</span>
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="js/config.js"></script>
-    <script src="js/mock-data.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/api.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Redirect to dashboard if already authenticated
-            if (auth.isAuthenticated()) {
-                window.location.href = 'dashboard.html';
-            }
+  <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3"></div>
 
-            const loginForm = document.getElementById('login-form');
-            const errorAlert = document.getElementById('login-error');
-            const loginBtnText = document.querySelector('#login-btn span');
-            const loginSpinner = document.getElementById('login-spinner');
-            const togglePasswordBtn = document.getElementById('toggle-password');
-            const passwordInput = document.getElementById('password');
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    /**
+     * Login page controller.
+     * Backend: POST {API_BASE_URL}/api/auth/login  { username, password }
+     * Stores JWT + role, then redirects to dashboard.html.
+     */
+    (function () {
+      'use strict';
 
-            // Toggle Password Visibility
-            togglePasswordBtn.addEventListener('click', () => {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                togglePasswordBtn.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-            });
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const form = document.getElementById('loginForm');
+        const userInput = document.getElementById('loginUsername');
+        const passInput = document.getElementById('loginPassword');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnLabel = document.getElementById('loginBtnLabel');
+        const btnSpinner = document.getElementById('loginBtnSpinner');
+        const alertBox = document.getElementById('loginAlert');
+        const alertMsg = document.getElementById('loginAlertMsg');
+        const infoBox = document.getElementById('loginInfo');
+        const infoMsg = document.getElementById('loginInfoMsg');
 
-            // Handle Login
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const username = document.getElementById('username').value;
-                const password = passwordInput.value;
-                
-                // Show loading
-                loginBtnText.classList.add('d-none');
-                loginSpinner.classList.remove('d-none');
-                document.getElementById('login-btn').disabled = true;
-                errorAlert.classList.add('d-none');
+        // Demo badge visibility follows config
+        if (!window.APP_CONFIG.USE_MOCK_DATA) {
+          document.getElementById('loginDemoBadge').style.display = 'none';
+        }
 
-                try {
-                    const response = await api.login(username, password);
-                    auth.processLogin(response.token, response.role, response.username);
-                    window.location.href = 'dashboard.html';
-                } catch (error) {
-                    errorAlert.textContent = error.message || "Invalid credentials.";
-                    errorAlert.classList.remove('d-none');
-                } finally {
-                    // Reset loading
-                    loginBtnText.classList.remove('d-none');
-                    loginSpinner.classList.add('d-none');
-                    document.getElementById('login-btn').disabled = false;
-                }
-            });
+        // Already signed in -> go to dashboard
+        if (window.Auth.isAuthenticated() && !params.get('expired')) {
+          window.location.href = 'dashboard.html';
+          return;
+        }
+
+        // Query flags
+        if (params.get('expired') === '1') {
+          infoBox.style.display = '';
+          infoMsg.textContent = 'Your session expired. Please sign in again.';
+        } else if (params.get('logged_out') === '1') {
+          infoBox.style.display = '';
+          infoMsg.textContent = 'You have been signed out securely.';
+        }
+
+        // Show / hide password
+        const toggle = document.getElementById('passwordToggle');
+        const toggleIcon = document.getElementById('passwordToggleIcon');
+        const flipPassword = () => {
+          const show = passInput.type === 'password';
+          passInput.type = show ? 'text' : 'password';
+          toggleIcon.className = show ? 'bi bi-eye-slash' : 'bi bi-eye';
+        };
+        toggle.addEventListener('click', flipPassword);
+        toggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flipPassword(); } });
+
+        // Demo quick-fill
+        document.querySelectorAll('[data-demo-user]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            userInput.value = btn.getAttribute('data-demo-user');
+            passInput.value = btn.getAttribute('data-demo-pass');
+            hideError();
+            form.classList.remove('was-validated');
+            window.UI.toast('Demo credentials filled for ' + btn.textContent.trim() + '.', 'info');
+            loginBtn.focus();
+          });
         });
-    </script>
+
+        function showError(msg) {
+          alertMsg.textContent = msg;
+          alertBox.classList.add('show');
+        }
+        function hideError() {
+          alertBox.classList.remove('show');
+        }
+        [userInput, passInput].forEach(el => el.addEventListener('input', hideError));
+
+        function setLoading(loading) {
+          loginBtn.disabled = loading;
+          btnLabel.style.display = loading ? 'none' : '';
+          btnSpinner.style.display = loading ? '' : 'none';
+        }
+
+        // Submit -> api.login() (mock or real depending on config)
+        form.addEventListener('submit', async e => {
+          e.preventDefault();
+          hideError();
+          form.classList.add('was-validated');
+          if (!form.checkValidity()) return;
+
+          const username = userInput.value.trim();
+          const password = passInput.value;
+          setLoading(true);
+
+          try {
+            const session = await window.api.login(username, password);
+            if (!session || !session.token) throw new Error('Login failed: no token received.');
+            window.Auth.saveSession(session);
+            window.UI.toast('Welcome back, ' + (session.username || username) + '!', 'success');
+            setTimeout(() => { window.location.href = 'dashboard.html'; }, 450);
+          } catch (err) {
+            console.error(err);
+            showError(err.message || 'Invalid username or password.');
+            passInput.select();
+          } finally {
+            setLoading(false);
+          }
+        });
+
+        userInput.focus();
+      });
+    })();
+  </script>
 </body>
 </html>

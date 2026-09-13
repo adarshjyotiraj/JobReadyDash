@@ -1,161 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics - JobReadyDash</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Analytics — JobReadyDash (SIH26135)</title>
+  <meta name="description" content="Placement analytics, employment distribution and skill gap analysis by district." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F3B63'/%3E%3Cpath d='M9 20l4-6 3 4 3-5 4 7z' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
+  <div class="tricolor-bar"></div>
 
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>JobReadyDash</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="participants.html"><i class="bi bi-people"></i> Participants</a>
-                </li>
-                <li class="active">
-                    <a href="analytics.html"><i class="bi bi-bar-chart-line"></i> Analytics</a>
-                </li>
-                <li style="margin-top: 50px;">
-                    <a href="#" class="logout-btn text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                </li>
-            </ul>
-        </nav>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <div class="sidebar-brand">
+        <span class="brand-mark light"><i class="bi bi-bar-chart-line-fill"></i></span>
+        <div><div class="brand-name">JobReadyDash</div><div class="brand-sub">Outcome Tracking</div></div>
+      </div>
+      <div class="sidebar-sih"><small>SIH 2026 · SIH26135</small><span class="badge bg-light text-dark" style="font-size:.62rem">MVP</span></div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <a href="dashboard.html" class="sidebar-link" data-page="dashboard"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+        <a href="participants.html" class="sidebar-link" data-page="participants" data-nav="participants"><i class="bi bi-people-fill"></i> Participants</a>
+        <a href="analytics.html" class="sidebar-link" data-page="analytics" data-nav="analytics" data-require-analytics><i class="bi bi-graph-up-arrow"></i> Analytics</a>
+        <div class="sidebar-section mt-3">Account</div>
+        <a href="#" class="sidebar-link" data-action="logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      </nav>
+      <div class="sidebar-user">
+        <span class="sidebar-avatar" data-user-initials>–</span>
+        <div class="min-w-0"><div class="nm" data-user-name>User</div><div class="rl" data-user-role>Role</div></div>
+      </div>
+      <div class="sidebar-logout">
+        <button class="btn btn-outline-light btn-sm w-100" data-action="logout"><i class="bi bi-box-arrow-right me-1"></i> Sign out</button>
+      </div>
+    </aside>
+    <div id="sidebarOverlay"></div>
 
-        <!-- Page Content -->
-        <div id="content">
-            <!-- Top Navbar -->
-            <nav class="top-navbar">
-                <div class="d-flex align-items-center">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary d-none me-3">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <h4 class="navbar-brand">Detailed Analytics</h4>
-                </div>
-                <div class="user-profile">
-                    <i class="bi bi-bell fs-5 text-muted"></i>
-                    <div class="ms-3 d-flex align-items-center">
-                        <span class="user-name-display me-2 fw-semibold"></span>
-                        <span class="user-role-badge"></span>
-                        <i class="bi bi-person-circle fs-4 text-primary ms-2"></i>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Main Container -->
-            <div class="container-fluid px-4">
-                
-                <!-- Filter Section -->
-                <div class="card mb-4 bg-light border-0">
-                    <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
-                        <div>
-                            <h5 class="mb-0 text-primary"><i class="bi bi-funnel"></i> Data Filters</h5>
-                            <small class="text-muted">Filter analytics by specific demographics or regions.</small>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <label for="district-filter" class="fw-semibold text-nowrap">District:</label>
-                            <select id="district-filter" class="form-select" style="width: 200px;">
-                                <option value="ALL">All Districts</option>
-                                <option value="District A">District A</option>
-                                <option value="District B">District B</option>
-                                <option value="District C">District C</option>
-                                <option value="District D">District D</option>
-                            </select>
-                            <button id="btn-apply-filter" class="btn btn-primary">Apply</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Summary Row -->
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="card bg-primary text-white h-100">
-                            <div class="card-body text-center d-flex flex-column justify-content-center py-4">
-                                <h6>Overall Placement Rate</h6>
-                                <h1 id="stat-placement-rate" class="display-4 fw-bold text-white mb-0">--%</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card h-100">
-                            <div class="card-header">Employment Distribution</div>
-                            <div class="card-body">
-                                <div class="chart-container" style="height: 200px;">
-                                    <canvas id="employmentBarChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Detailed Analytics Row -->
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-header">Top 5 Skill Gaps Analyzed</div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="detailedSkillGapChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-header">Skill Gap Breakdown</div>
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Skill Category</th>
-                                                <th>Gap Score (0-100)</th>
-                                                <th>Priority Level</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="skill-gap-table-body">
-                                            <!-- Populated by JS -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button class="topbar-icon-btn hamburger" data-sidebar-toggle aria-label="Open menu"><i class="bi bi-list"></i></button>
+        <div class="topbar-title"><h1>Analytics</h1><p>Placement &amp; skill-gap intelligence · <strong id="scopeLabel">All Districts</strong></p></div>
+        <div class="topbar-actions">
+          <span id="demoModeBadge" class="demo-badge d-none d-md-inline-flex"><i class="bi bi-flask"></i> Demo data</span>
+          <span id="analyticsSpinner" class="text-primary small" style="display:none"><span class="spinner-border spinner-border-sm"></span> Loading</span>
+          <div class="topbar-profile" role="button" data-bs-toggle="dropdown" aria-label="Account menu">
+            <span class="profile-avatar" data-user-initials>–</span>
+            <span class="meta"><span class="nm d-block" data-user-name>User</span><span class="rl d-block" data-user-role>Role</span></span>
+            <i class="bi bi-chevron-down text-muted small"></i>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><h6 class="dropdown-header">Signed in as <strong data-user-name>User</strong></h6></li>
+            <li><a class="dropdown-item text-danger" href="#" data-action="logout"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
+          </ul>
         </div>
+      </header>
+
+      <main class="main-content">
+        <div class="page-head">
+          <div>
+            <h2>Placement &amp; Skill-Gap Analytics</h2>
+            <p>Filter by district to compare outcomes and priorities. <span id="analyticsSpinner2"></span></p>
+          </div>
+          <div class="d-flex gap-2 no-print">
+            <button class="btn btn-outline-primary btn-sm" id="printReportBtn"><i class="bi bi-printer me-1"></i> Print report</button>
+          </div>
+        </div>
+
+        <div id="analyticsError" class="alert alert-danger d-flex align-items-center gap-2" style="display:none" role="alert">
+          <i class="bi bi-exclamation-octagon-fill"></i>
+          <span id="analyticsErrorMsg" class="flex-grow-1">Failed to load.</span>
+          <button id="analyticsRetry" class="btn btn-sm btn-outline-danger">Retry</button>
+        </div>
+
+        <!-- District filter -->
+        <div class="toolbar mb-3">
+          <div class="row g-2 align-items-end">
+            <div class="col-12 col-md-5 col-xl-4">
+              <label class="form-label" for="districtSelect"><i class="bi bi-geo-alt me-1"></i>District filter</label>
+              <select id="districtSelect" class="form-select">
+                <option value="All">All Districts</option>
+              </select>
+            </div>
+            <div class="col-12 col-md-7 col-xl-8">
+              <div class="d-flex gap-2 flex-wrap align-items-center">
+                <button class="btn btn-outline-secondary btn-sm" id="resetDistrictBtn"><i class="bi bi-x-circle me-1"></i> Reset to all</button>
+                <span class="filter-chip"><i class="bi bi-funnel-fill"></i><span id="scopeChip">Showing: All Districts</span></span>
+                <span class="text-muted small ms-auto d-none d-md-inline">Source: GET /api/analytics/*</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placement summary -->
+        <div class="jrd-card mb-3">
+          <div class="jrd-card-header">
+            <div>
+              <h3 class="jrd-card-title">Placement Summary</h3>
+              <p class="jrd-card-subtitle">Key outcome indicators for the selected scope</p>
+            </div>
+            <span id="aVerdict" class="badge bg-success">—</span>
+          </div>
+          <div class="jrd-card-body">
+            <div class="row g-3 align-items-center">
+              <div class="col-12 col-lg-4">
+                <div class="d-flex align-items-end gap-2">
+                  <span style="font-size:2.6rem;font-weight:800;color:#0b2c4a;line-height:1" id="aRate" data-skeleton>—</span>
+                  <span class="text-muted small mb-1">placement<br />rate</span>
+                </div>
+                <div class="progress mt-2" style="height:10px"><div class="progress-bar bg-success" id="aRateBar" style="width:0%"></div></div>
+                <p class="text-muted small mt-2 mb-0">Target ≥ 70% · Placed = Employed + Self-Employed</p>
+              </div>
+              <div class="col-12 col-lg-8">
+                <div class="row g-2">
+                  <div class="col-6 col-md-4"><div class="summary-tile"><div class="lbl">Total</div><div class="val" id="aTotal" data-skeleton>—</div></div></div>
+                  <div class="col-6 col-md-4"><div class="summary-tile"><div class="lbl">Placed</div><div class="val" id="aPlaced" data-skeleton>—</div></div></div>
+                  <div class="col-6 col-md-4"><div class="summary-tile"><div class="lbl">Unemployed</div><div class="val" id="aUnemployed" data-skeleton>—</div></div></div>
+                  <div class="col-6 col-md-4"><div class="summary-tile"><div class="lbl">Self-employed</div><div class="val" id="aSelf" data-skeleton>—</div></div></div>
+                  <div class="col-6 col-md-4"><div class="summary-tile"><div class="lbl">Further training</div><div class="val" id="aTraining" data-skeleton>—</div></div></div>
+                  <div class="col-6 col-md-4"><div class="summary-tile" style="background:#e8eff7;border-color:#c9d8ea"><div class="lbl">Scope</div><div class="val" style="font-size:1rem" id="scopeTile">All Districts</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distribution + district comparison -->
+        <div class="row g-3 mb-3">
+          <div class="col-12 col-xl-5">
+            <div class="jrd-card h-100">
+              <div class="jrd-card-header">
+                <div>
+                  <h3 class="jrd-card-title">Employment Distribution</h3>
+                  <p class="jrd-card-subtitle">Share of each outcome in scope</p>
+                </div>
+              </div>
+              <div class="jrd-card-body"><div id="distBreakdown" data-skeleton>
+                <div class="skel-line skeleton mb-2">&nbsp;</div><div class="skel-line skeleton mb-2">&nbsp;</div><div class="skel-line skeleton">&nbsp;</div>
+              </div></div>
+            </div>
+          </div>
+          <div class="col-12 col-xl-7">
+            <div class="jrd-card h-100">
+              <div class="jrd-card-header">
+                <div>
+                  <h3 class="jrd-card-title">District-wise Placement</h3>
+                  <p class="jrd-card-subtitle">Placed vs. not placed by district</p>
+                </div>
+              </div>
+              <div class="jrd-card-body"><div class="chart-box" data-skeleton><canvas id="districtChart"></canvas></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trend -->
+        <div class="jrd-card mb-3">
+          <div class="jrd-card-header">
+            <div>
+              <h3 class="jrd-card-title">Monthly Placement Trend</h3>
+              <p class="jrd-card-subtitle">Enrolments vs. placements (last 6 months)</p>
+            </div>
+            <span class="gov-badge"><i class="bi bi-calendar3"></i> Apr – Sep 2026</span>
+          </div>
+          <div class="jrd-card-body"><div class="chart-box short" data-skeleton><canvas id="trendChart"></canvas></div></div>
+        </div>
+
+        <!-- Skill gaps -->
+        <div class="row g-3">
+          <div class="col-12 col-xl-7">
+            <div class="jrd-card h-100">
+              <div class="jrd-card-header">
+                <div>
+                  <h3 class="jrd-card-title">Skill Gap Analysis</h3>
+                  <p class="jrd-card-subtitle">Top 5 gaps · demand vs. supply (%)</p>
+                </div>
+              </div>
+              <div class="jrd-card-body"><div class="chart-box" data-skeleton><canvas id="gapChart"></canvas></div></div>
+            </div>
+          </div>
+          <div class="col-12 col-xl-5">
+            <div class="jrd-card h-100">
+              <div class="jrd-card-header">
+                <div>
+                  <h3 class="jrd-card-title">Top 5 Skill Gaps</h3>
+                  <p class="jrd-card-subtitle">Ranked by gap size</p>
+                </div>
+              </div>
+              <div class="table-responsive-mobile">
+                <table class="table table-jrd">
+                  <thead><tr><th>#</th><th>Skill</th><th class="text-center">Demand</th><th class="text-center">Supply</th><th>Gap</th><th>Priority</th></tr></thead>
+                  <tbody id="gapTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="app-footer text-center">JobReadyDash v1.0.0-mvp · Smart India Hackathon 2026 · SIH26135</footer>
+      </main>
     </div>
+  </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container"></div>
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title"><i class="bi bi-box-arrow-right me-2"></i>Sign out?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body"><p class="mb-0 small text-muted">Your session will be ended securely.</p></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary btn-sm" id="confirmLogoutBtn">Yes, sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Core Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- App Scripts -->
-    <script src="js/config.js"></script>
-    <script src="js/mock-data.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/analytics.js"></script>
+  <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    // Keep scope labels in sync (chip + tile)
+    document.addEventListener('DOMContentLoaded', () => {
+      const sel = document.getElementById('districtSelect');
+      const sync = () => {
+        const v = sel.value === 'All' ? 'All Districts' : sel.value;
+        const chip = document.getElementById('scopeChip');
+        const tile = document.getElementById('scopeTile');
+        if (chip) chip.textContent = 'Showing: ' + v;
+        if (tile) tile.textContent = v;
+      };
+      sel.addEventListener('change', sync);
+      document.getElementById('resetDistrictBtn').addEventListener('click', () => setTimeout(sync, 50));
+      sync();
+    });
+  </script>
 </body>
 </html>
