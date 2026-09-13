@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobReadyDash - Login (SIH26135)</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        body {
+            background-color: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .login-card {
+            max-width: 450px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 40px;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header h2 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 15px;
+        }
+        .login-header img {
+            width: 80px;
+            height: auto;
+        }
+        .govt-tag {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container w-100 px-3">
+        <div class="login-card mx-auto">
+            <div class="login-header">
+                <i class="bi bi-shield-lock text-primary" style="font-size: 4rem;"></i>
+                <h2>JobReadyDash</h2>
+                <span class="govt-tag">SIH26135 - Secure Portal</span>
+            </div>
+            
+            <div id="login-error" class="alert alert-danger d-none" role="alert">
+                Invalid username or password.
+            </div>
+
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                        <input type="password" class="form-control" id="password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg" id="login-btn">
+                        <span>Login to Dashboard</span>
+                        <div class="spinner-border spinner-border-sm text-light d-none" id="login-spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="mt-4 text-center text-muted" style="font-size: 0.85rem;">
+                    <p class="mb-1">Demo Credentials (Mock Mode):</p>
+                    <p class="mb-0"><strong>admin</strong> / password</p>
+                    <p class="mb-0"><strong>dataentry</strong> / password</p>
+                    <p class="mb-0"><strong>analyst</strong> / password</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Redirect to dashboard if already authenticated
+            if (auth.isAuthenticated()) {
+                window.location.href = 'dashboard.html';
+            }
+
+            const loginForm = document.getElementById('login-form');
+            const errorAlert = document.getElementById('login-error');
+            const loginBtnText = document.querySelector('#login-btn span');
+            const loginSpinner = document.getElementById('login-spinner');
+            const togglePasswordBtn = document.getElementById('toggle-password');
+            const passwordInput = document.getElementById('password');
+
+            // Toggle Password Visibility
+            togglePasswordBtn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePasswordBtn.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+            });
+
+            // Handle Login
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = passwordInput.value;
+                
+                // Show loading
+                loginBtnText.classList.add('d-none');
+                loginSpinner.classList.remove('d-none');
+                document.getElementById('login-btn').disabled = true;
+                errorAlert.classList.add('d-none');
+
+                try {
+                    const response = await api.login(username, password);
+                    auth.processLogin(response.token, response.role, response.username);
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    errorAlert.textContent = error.message || "Invalid credentials.";
+                    errorAlert.classList.remove('d-none');
+                } finally {
+                    // Reset loading
+                    loginBtnText.classList.remove('d-none');
+                    loginSpinner.classList.add('d-none');
+                    document.getElementById('login-btn').disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

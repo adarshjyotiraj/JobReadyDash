@@ -1,0 +1,76 @@
+/* Responsive adjustments */
+
+@media (max-width: 991.98px) {
+    .kpi-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Collapse sidebar on mobile */
+    #sidebar {
+        margin-left: calc(-1 * var(--sidebar-width));
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+    }
+    
+    #sidebar.active {
+        margin-left: 0;
+    }
+    
+    /* Show mobile toggle */
+    #sidebarCollapse {
+        display: inline-block !important;
+    }
+    
+    .top-navbar {
+        padding: 15px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .user-profile {
+        gap: 10px;
+    }
+    
+    .user-role-badge {
+        display: none; /* Hide role badge on small screens to save space */
+    }
+    
+    /* Login Page */
+    .login-container {
+        margin-top: 20px !important;
+        padding: 15px;
+    }
+    
+    /* Charts */
+    .chart-container {
+        height: 250px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .table-responsive {
+        border: 0;
+    }
+    
+    /* For smaller screens, could implement card-based table view, 
+       but standard horizontal scroll is usually preferred for data tables */
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .kpi-info h2 {
+        font-size: 1.5rem;
+    }
+    
+    .kpi-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
